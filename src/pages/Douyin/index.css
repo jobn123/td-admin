@@ -1,0 +1,21 @@
+.dy-search {
+  display: flex !important;
+}
+.data-box {
+  display: flex;
+  justify-content: center;
+}
+.data-box_table {
+  min-width: 600px;
+}
+.data-box_tab {
+  min-width: 400px;
+  margin-left: 50px;
+}
+.ant-select-selector {
+  height: 40px !important;
+  line-height: 40px !important;
+}
+.ant-select-selection-item {
+  line-height: unset !important;
+}
