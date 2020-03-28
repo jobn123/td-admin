@@ -1,7 +1,10 @@
-import { observable} from "mobx"
+import { observable, action } from "mobx"
 
 class HomeStore {
-  @observable homeNum = 0
+  @observable loginStatus = false
+  @action changeLoginStatus() {
+    this.loginStatus = true
+  }
 }
 
 export default HomeStore

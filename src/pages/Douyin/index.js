@@ -89,16 +89,6 @@ function callback() {
 function DouYin() {
   return (
     <div className="DouYin">
-      {/* <Row style={{ marginTop: 50 }}>
-        <Col>类别</Col>
-        <Col>全部</Col>
-        <Col></Col>
-      </Row>
-      <Row>
-        <Col>粉丝数</Col>
-        <Col>全部</Col>
-        <Col></Col>
-      </Row> */}
       <Row style={{ marginTop: 50 }}>
         <Col span={2} offset={4}>
           <Select defaultValue="0" style={{ width: '100%' }}>
@@ -118,7 +108,7 @@ function DouYin() {
         </Col>
       </Row>
       <Row style={{ marginTop: 50 }}>
-        <Col span={13} offset={2}>
+        <Col span={12} offset={2}>
           <Table columns={columns} dataSource={data} className="data-box_table"/>
         </Col>
         <Col span={6} offset={1}>
