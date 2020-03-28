@@ -130,7 +130,7 @@ function App() {
   }
   return (
     <div className="App">
-      {layoutTemp}
+      { layoutTemp }
     </div>
   );
 }
