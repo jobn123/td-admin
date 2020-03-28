@@ -89,6 +89,16 @@ function callback() {
 function DouYin() {
   return (
     <div className="DouYin">
+      {/* <Row style={{ marginTop: 50 }}>
+        <Col>类别</Col>
+        <Col>全部</Col>
+        <Col></Col>
+      </Row>
+      <Row>
+        <Col>粉丝数</Col>
+        <Col>全部</Col>
+        <Col></Col>
+      </Row> */}
       <Row style={{ marginTop: 50 }}>
         <Col span={2} offset={4}>
           <Select defaultValue="0" style={{ width: '100%' }}>

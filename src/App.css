@@ -1,39 +1,30 @@
-/* .App {
-  text-align: center;
-} */
-.header {
-  display: flex;
-  background: #FFF !important;
-  font-size: 16px;
+* {
+  margin: 0;
+  padding: 0;
 }
-.headerlogo {
-  width: 150px;
+.logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
 }
-.link {
-  color: #777;
-  margin-right: 20px;
+.site-layout .site-layout-background {
+  background: #fff;
 }
-.headeruser {
-  display: flex;
-  justify-content: flex-end;
+.tdheader-avatar {
+  position: relative;
+  cursor: pointer;
 }
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.avatar-info {
+  display: none;
+  position: absolute;
+  z-index: 9;
+  right: -80px;
+  width: 200px; 
+  height: 200px;
+  background-color: rgb(255, 255, 255) !important;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 12px 2px !important;
+  border-radius: 5px !important;
 }
-.App-link {
-  color: #61dafb;
-}
-.ant-layout-content {
-  min-height: 90vh !important;
-}
-.ant-layout-footer {
-  text-align: center;
-  background: #fff !important;
+.tdheader-avatar:hover .avatar-info {
+  display: block;
 }
