@@ -5,8 +5,10 @@ import { setModel, useModel } from 'flooks'
 import globalstate from './store'
 import Home from './pages/Home'
 import About from './pages/About'
-import Douyin from './pages/Douyin'
+import Repaire from './pages/Repaire'
 import Login from './pages/Login'
+import User from './pages/User'
+import UserCreate from './pages/User/create'
 import Cookies from 'js-cookie'
 import {
   DesktopOutlined,
@@ -59,22 +61,13 @@ function App() {
               </Menu.Item>
               <Menu.Item key="2">
                 <DesktopOutlined />
-                <Link className="link" to="/douyin">KOL</Link>
+                <Link className="link" to="/repaire">报修</Link>
               </Menu.Item>
-              <SubMenu
-                key="sub1"
-                title={
-                  <span>
-                    <UserOutlined />
-                    <span>User</span>
-                  </span>
-                }
-              >
-                <Menu.Item key="3">Tom</Menu.Item>
-                <Menu.Item key="4">Bill</Menu.Item>
-                <Menu.Item key="5">Alex</Menu.Item>
-              </SubMenu>
-              <SubMenu
+              <Menu.Item key="3">
+                <UserOutlined />
+                <Link className="link" to="/user">用户</Link>
+              </Menu.Item>
+              {/* <SubMenu
                 key="sub2"
                 title={
                   <span>
@@ -85,9 +78,10 @@ function App() {
               >
                 <Menu.Item key="6">Team 1</Menu.Item>
                 <Menu.Item key="8">Team 2</Menu.Item>
-              </SubMenu>
+              </SubMenu> */}
               <Menu.Item key="9">
                 <FileOutlined />
+                <Link className="link" to="/user">我的</Link>
               </Menu.Item>
             </Menu>
           </Sider>
@@ -112,14 +106,16 @@ function App() {
               </div>
             </Header>
             <Content style={{ margin: '0 16px' }}>
-              <Breadcrumb style={{ margin: '16px 0' }}>
+              {/* <Breadcrumb style={{ margin: '16px 0' }}>
                 <Breadcrumb.Item>User</Breadcrumb.Item>
                 <Breadcrumb.Item>Bill</Breadcrumb.Item>
-              </Breadcrumb>
+              </Breadcrumb> */}
               <div className="site-layout-background">
                 <Route exact path="/" component={Home} />
-                <Route path="/douyin" component={Douyin} />
+                <Route path="/repaire" component={Repaire} />
                 <Route path="/about" component={About} />
+                <Route exact path="/user" component={User} />
+                <Route exact path="/user/create" component={UserCreate} />
               </div>
             </Content>
             <Footer style={{ textAlign: 'center' }}> ©2018 Created by Eleven</Footer>
