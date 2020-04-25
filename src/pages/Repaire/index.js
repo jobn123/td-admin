@@ -131,7 +131,7 @@ function Repaire() {
         </Col>
       </Row> */}
       <Row style={{ marginTop: 50 }}>
-        <Button type="primary">添加用户</Button>
+        {/* <Button type="primary">添加用户</Button> */}
         <Col span={24}>
           <Table 
             style={{ minHeight: 500 }}

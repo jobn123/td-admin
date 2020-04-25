@@ -25,18 +25,18 @@ function Home() {
       </Carousel>
       <Row style={{ marginTop: 50 }}>
         <Col span={6} offset={2}>
-          <Card title="抖音榜单" bordered={false}>
-            基于抖音移动端数据分析，VideoRank提供抖音自媒体发展状况的动态、详实数据，以及全方位的咨询评估服务。
+          <Card title="郯城供电" bordered={false}>
+            郯城供电郯城供电郯城供电
           </Card>
         </Col>
         <Col span={6} offset={1}>
-          <Card title="数据监测" bordered={false}>
-            全称为抖音视频分钟级传播监测。对抖音视频定制分钟级传播效果监测，实时汇总客签单发布情况，有效验证传播效果。
+          <Card title="郯城供电" bordered={false}>
+            郯城供电郯城供电郯城供电
           </Card>
         </Col>
         <Col span={6} offset={1}>
-          <Card title="粉丝画像" bordered={false}>
-            对抖音用户生成粉丝画像，画像会从粉丝性别、年龄、地区、星座四个维度进行分析，更方便对KOL的定位和选择。
+          <Card title="郯城供电" bordered={false}>
+            郯城供电郯城供电郯城供电
           </Card>
         </Col>
       </Row>
