@@ -1,80 +1,70 @@
-import React from 'react';
-import { Input, Select, Table, Row, Col } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { getAllManager } from '../../api'
+import { Table, Row, Col, Button } from 'antd';
+// 
+import { useHistory } from 'react-router-dom'
 
 const columns = [
   {
     title: 'No.',
+    dataIndex: 'key',
+    key: 'key',
+    render: key => <div>{key + 1}</div>
+  },
+  {
+    title: '姓名',
     dataIndex: 'name',
-    key: 'name',
-    render: text => <a>{text}</a>,
+    key: 'name'
   },
   {
-    title: '用户类型',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: '联系方式',
-    dataIndex: 'address',
-    key: 'address',
+    title: '联系电话',
+    dataIndex: 'phone',
+    key: 'phone'
   },
   {
     title: '负责台区',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: tags => (
-      <span>
-        {tags}
-      </span>
-    ),
+    key: 'managevillages',
+    dataIndex: 'managevillages'
   }
-];
-
-const data = [
-  {
-    key: '1',
-    name: '1',
-    age: '09:30',
-    address: '西杨庄',
-    tags: '张三',
-    c: '开关坏',
-    d: '苏瑞洁',
-    e: '3700695',
-    f: '李刚'
-  },
-  {
-    key: '2',
-    name: '2',
-    age: '09:30',
-    address: '西杨庄',
-    tags: '李四',
-    c: '开关坏',
-    d: '苏瑞洁',
-    e: '3700695',
-    f: '李刚'
-  },
-  {
-    key: '3',
-    name: '3',
-    age: '09:30',
-    address: '西杨庄',
-    tags: '王五',
-    c: '开关坏',
-    d: '苏瑞洁',
-    e: '3700695',
-    f: '李刚'
-  },
-];
+]
 
 function Repaire() {
+  const history = useHistory()
+  const [lists, setLists] = useState([])
+  const [page, setPage] = useState(1)
+
+  const getManagers = async () => {
+    try {
+      const res = await getAllManager()
+      if (res && res.length) {
+        const arrkey = []
+        res.map((item, key) => {
+          item.key = key
+          arrkey.push(item)
+        })
+        setLists(arrkey)
+      }
+    } catch (error) {
+      
+    }
+  }
+
+  useEffect(() => {
+    getManagers()
+  }, [page])
+  
   return (
     <div className="Repaire">
       <Row style={{ marginTop: 50 }}>
-        <Col span={24}>
-          <Table 
+        <Col>
+          <Button type="primary"
+            onClick={()=> history.push('/user/create')}>新增</Button>
+        </Col>
+        <Col span={24} style={{ marginTop: 20 }}>
+          <Table
             style={{ minHeight: 500 }}
             columns={columns} 
-            dataSource={data} 
+            dataSource={lists} 
             className="data-box_table"/>
         </Col>
       </Row>

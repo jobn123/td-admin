@@ -9,21 +9,34 @@ import Repaire from './pages/Repaire'
 import Login from './pages/Login'
 import User from './pages/User'
 import UserCreate from './pages/User/create'
+import Villages from './pages/Villages'
+import Faults from './pages/Faults'
 import Cookies from 'js-cookie'
 import {
   DesktopOutlined,
   PieChartOutlined,
   FileOutlined,
-  TeamOutlined,
   UserOutlined
 } from '@ant-design/icons'
 import './App.css'
 import 'antd/dist/antd.css'
 const { Header, Footer, Content, Sider } = Layout
-const { SubMenu } = Menu
+// const { SubMenu } = Menu
 setModel('globalstate', globalstate)
 
+const menulists = {
+  '': "0",
+  'repaire': "1",
+  'user': "2",
+  'villages': "3",
+  'faults': "4"
+}
+
 function App() {
+  
+  const pname = window.location.pathname.replace('/', '')
+  const pathindex = menulists[pname]
+  // debugger
   const { loginStatus } = useModel('globalstate')
   let islogin = false
   if (Cookies.get('td_login')) {
@@ -54,34 +67,26 @@ function App() {
         <Router>
           <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
             <div className="logo" />
-            <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-              <Menu.Item key="1">
+            <Menu theme="dark" defaultSelectedKeys={[pathindex]} mode="inline">
+              <Menu.Item key="0">
                 <PieChartOutlined />
                 <Link className="link" to="/">首页</Link>
               </Menu.Item>
-              <Menu.Item key="2">
+              <Menu.Item key="1">
                 <DesktopOutlined />
                 <Link className="link" to="/repaire">报修</Link>
               </Menu.Item>
+              <Menu.Item key="2">
+                <UserOutlined />
+                <Link className="link" to="/user">台区经理</Link>
+              </Menu.Item>
               <Menu.Item key="3">
                 <UserOutlined />
-                <Link className="link" to="/user">用户</Link>
+                <Link className="link" to="/villages">村庄</Link>
               </Menu.Item>
-              {/* <SubMenu
-                key="sub2"
-                title={
-                  <span>
-                    <TeamOutlined />
-                    <span>Team</span>
-                  </span>
-                }
-              >
-                <Menu.Item key="6">Team 1</Menu.Item>
-                <Menu.Item key="8">Team 2</Menu.Item>
-              </SubMenu> */}
-              <Menu.Item key="9">
+              <Menu.Item key="4">
                 <FileOutlined />
-                <Link className="link" to="/user">我的</Link>
+                <Link className="link" to="/faults">故障类型</Link>
               </Menu.Item>
             </Menu>
           </Sider>
@@ -102,7 +107,7 @@ function App() {
                   size="large">
                   张三
               </Avatar>
-                <div className="avatar-info">x</div>
+                {/* <div className="avatar-info">x</div> */}
               </div>
             </Header>
             <Content style={{ margin: '0 16px' }}>
@@ -116,6 +121,8 @@ function App() {
                 <Route path="/about" component={About} />
                 <Route exact path="/user" component={User} />
                 <Route exact path="/user/create" component={UserCreate} />
+                <Route path="/villages" component={Villages} />
+                <Route path="/faults" component={Faults} />
               </div>
             </Content>
             <Footer style={{ textAlign: 'center' }}> ©2018 Created by Eleven</Footer>

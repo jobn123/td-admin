@@ -1,20 +1,21 @@
-import React from 'react';
-import { Input, Select, Table, Row, Col, Button } from 'antd';
-import './index.css';
-const { Search } = Input;
-const { Option } = Select;
+import React, { useEffect, useState } from 'react';
+
+import { Table, Row, Col, Radio, notification } from 'antd';
+import { getAllRepaires } from '../../api';
+// import './index.css';
 
 const columns = [
   {
     title: 'No.',
-    dataIndex: 'name',
-    key: 'name',
-    render: text => <a>{text}</a>,
+    dataIndex: 'key',
+    key: 'key',
+    render: key => <a>{key + 1}</a>,
   },
   {
     title: '报修时间',
-    dataIndex: 'age',
-    key: 'age',
+    dataIndex: 'createdAt',
+    key: 'createdAt',
+    render: s => <div>{s.replace(/T/g,' ').replace(/\.\d+Z$/,'')}</div>
   },
   {
     title: '台区名称',
@@ -23,43 +24,32 @@ const columns = [
   },
   {
     title: '客户姓名',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: tags => (
-      <span>
-        {tags}
-      </span>
-    ),
+    key: 'name',
+    dataIndex: 'name'
   },
   {
     title: '客户报修电话',
-    key: 'action',
-    render: (text, record) => (
-      <span>
-        {/* <a style={{ marginRight: 16 }}> {record.tags}</a> */}
-        18888888888
-      </span>
-    ),
+    key: 'phone',
+    dataIndex: 'phone'
   },
-  {
-    title: '产权归属',
-    key: 'action',
-    render: (text, record) => (
-      <span>
-        {/* <a style={{ marginRight: 16 }}> {record.tags}</a> */}
-        公司产权
-      </span>
-    ),
-  },
+  // {
+  //   title: '产权归属',
+  //   key: 'action',
+  //   render: (text, record) => (
+  //     <span>
+  //       公司产权
+  //     </span>
+  //   ),
+  // },
   {
     title: '故障原因',
-    dataIndex: 'c',
-    key: 'c',
+    dataIndex: 'faulttype',
+    key: 'faulttype',
   },
   {
     title: '维修人员',
-    dataIndex: 'd',
-    key: 'd',
+    dataIndex: 'manager',
+    key: 'manager',
   },
   {
     title: '客户拨入电话',
@@ -68,75 +58,58 @@ const columns = [
   },
   {
     title: '台区管理人',
-    dataIndex: 'f',
-    key: 'f',
+    dataIndex: 'manager',
+    key: 'manager',
   },
-];
-
-const data = [
-  {
-    key: '1',
-    name: '1',
-    age: '09:30',
-    address: '西杨庄',
-    tags: '张三',
-    c: '开关坏',
-    d: '苏瑞洁',
-    e: '3700695',
-    f: '李刚'
-  },
-  {
-    key: '2',
-    name: '2',
-    age: '09:30',
-    address: '西杨庄',
-    tags: '李四',
-    c: '开关坏',
-    d: '苏瑞洁',
-    e: '3700695',
-    f: '李刚'
-  },
-  {
-    key: '3',
-    name: '3',
-    age: '09:30',
-    address: '西杨庄',
-    tags: '王五',
-    c: '开关坏',
-    d: '苏瑞洁',
-    e: '3700695',
-    f: '李刚'
-  },
-];
+]
 
 function Repaire() {
+  const [tag, setTag] = useState("0")
+  const [page, setPage] = useState(1)
+  const [lists, setLists] = useState([])
+
+  const getAllRepaireLists = async () => {
+    try {
+      const res = await getAllRepaires()
+      if (res && res.length) {
+        const arrkey = []
+        res.map((item, key) => {
+          item.key = key
+          arrkey.push(item)
+        })
+        setLists(arrkey)
+      }
+    } catch (error) {
+      // notification.error({
+      //   message: 'Notification Title',
+      //   description:
+      //     'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+      // })
+    }
+  }
+
+  useEffect(() => {
+    getAllRepaireLists()
+  }, [page])
+
   return (
     <div className="Repaire">
-      {/* <Row style={{ marginTop: 50 }}>
-        <Col span={2} offset={4}>
-          <Select defaultValue="0" style={{ width: '100%' }}>
-            <Option value="0">抖音</Option>
-            <Option value="1">抖音KOL</Option>
-          </Select>
-        </Col>
-        <Col span={14}>
-          <Input.Group compact className="dy-search">
-            <Search
-              placeholder="请输入关键字"
-              enterButton="搜索"
-              size="large"
-              onSearch={value => console.log(value)}
-            />
-          </Input.Group>
-        </Col>
-      </Row> */}
       <Row style={{ marginTop: 50 }}>
-        {/* <Button type="primary">添加用户</Button> */}
+        <Col style={{ marginBottom: 20 }}>
+          <Radio.Group onChange={(e)=> {setTag(e.target.value)}}>
+            <Radio.Button value="0">
+                全部
+              </Radio.Button>
+            <Radio.Button value="1">未报修</Radio.Button>
+            <Radio.Button value="2">未打分</Radio.Button>
+          </Radio.Group>
+        </Col>
         <Col span={24}>
-          <Table 
+          <Table
+            onChange={(index)=> setPage(index)}
             style={{ minHeight: 500 }}
             columns={columns} 
-            dataSource={data} 
+            dataSource={lists}
             className="data-box_table"/>
         </Col>
       </Row>
